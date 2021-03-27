@@ -1,0 +1,11 @@
+.FileUpload {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+}
+
+.FileUpload input {
+  padding: 10px;
+}
