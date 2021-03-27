@@ -1,7 +1,7 @@
 const xlsx = require("xlsx");
 
-const editExcel = (filename) => {
-  const wb = xlsx.readFile(filename);
+const editExcel = (path, filename) => {
+  const wb = xlsx.readFile(path);
   // console.log(wb.SheetNames);
 
   const ws = wb.Sheets["Sheet1"];
@@ -20,7 +20,7 @@ const editExcel = (filename) => {
   const newWS = xlsx.utils.json_to_sheet(newData);
 
   xlsx.utils.book_append_sheet(newWB, newWS, "New Data");
-  xlsx.writeFile(newWB, "./outputFolder/output.xlsx")
+  xlsx.writeFile(newWB, "./outputFolder/" + filename);
 };
 
 // editExcel("input.xlsx");
