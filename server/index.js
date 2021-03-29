@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 
+const path = require("path");
 const multer = require("multer");
 const cors = require("cors");
 const fs = require("fs");
@@ -35,9 +36,18 @@ app.post("/upload", (req, res) => {
     }
 
     await editExcel("public/" + req.file.filename, req.file.filename);
-    // console.log("public/" + req.file.filename);
+
     fs.unlinkSync("public/" + req.file.filename);
-    return res.status(200).send(req.file);
+
+    const filepath = path.resolve("outputFolder/" + req.file.filename);
+
+    return res.sendFile(filepath, {
+      headers: {
+        "Content-Type":
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      },
+    });
+    // res.download(filepath, req.file.filename);
   });
 });
 
